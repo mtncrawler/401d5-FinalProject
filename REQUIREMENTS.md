@@ -13,8 +13,7 @@
 The purpose of this app is to convert handwritten notes into text files for easier storage, access, and manageability. The user will be able to store notes according to categories and groups can be formed to add and share notes within the group.
 
 ## Scope
-* IN:
-  
+IN:
  - The web app will allow users to upload an image and convert it to text.
  - The web app will allow users to save text from images to different categories.
  - The web app will allow the user to manage different categories for notes.
@@ -22,7 +21,7 @@ The purpose of this app is to convert handwritten notes into text files for easi
  - The web app will allow users to manage text notes in categories. 
  - User can edit text from image results.  
 
-* OUT:
+OUT:
  - We will only convert images to English.
   
 ### MVP
