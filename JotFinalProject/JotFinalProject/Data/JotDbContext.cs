@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JotFinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,11 @@ namespace JotFinalProject.Data
     public class JotDbContext : DbContext
     {
         public JotDbContext(DbContextOptions<JotDbContext> options) : base(options)
-        {
+        {              
 
         }
+
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

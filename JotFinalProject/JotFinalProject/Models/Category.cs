@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 
 namespace JotFinalProject.Models
 {
-    public class Note
+    public class Category
     {
         public int ID { get; set; }
 
-        public int UserID { get; set; }
+        public string Name { get; set; }
 
-        public string Text { get; set; }
-
-        public Category Category { get; set; }
+        public ICollection<Note> Notes { get; set; }
     }
 }
