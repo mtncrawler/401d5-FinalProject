@@ -65,7 +65,7 @@ Feature: As a user, I would like to delete a note.
 Acceptance Criteria: note will display option to delete, note will be removed from users note history  
 
 ## Wireframes
-
+![Wireframe](assets/Jot_wireframe.png)
 
 ## Dataflow Diagram
 ![Dataflow Diagram](assets/DataFlowDiagram.png)
