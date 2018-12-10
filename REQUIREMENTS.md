@@ -68,7 +68,7 @@ Acceptance Criteria: note will display option to delete, note will be removed fr
 
 
 ## Dataflow Diagram
-
+![Dataflow Diagram](assets/DataFlowDiagram.png)
 
 ## Database Schema
 ![DB Schema](assets/JotSchema_v1.JPG)
