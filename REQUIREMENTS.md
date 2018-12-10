@@ -71,4 +71,4 @@ Acceptance Criteria: note will display option to delete, note will be removed fr
 
 
 ## Database Schema
-
+![DB Schema](assets/JotSchema_v1.JPG)
