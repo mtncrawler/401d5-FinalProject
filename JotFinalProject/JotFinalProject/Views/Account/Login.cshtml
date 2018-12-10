@@ -1,0 +1,29 @@
+﻿@model JotFinalProject.Models.AccountViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+    <div class="wrapper">
+        <div class="logreg_form">
+            <h3>Login</h3>
+
+            <form class="form" action="/Account/Login" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <label asp-for="Email"></label>
+                <input asp-for="Email" placeholder="Email" />
+                <span asp-validation-for="Email" />
+
+                <label asp-for="Password"></label>
+                <input asp-for="Password" alt="Password" placeholder="Password" />
+                <span asp-validation-for="Password" />
+
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
