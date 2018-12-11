@@ -47,8 +47,30 @@ namespace JotFinalProject.Controllers
                 OperationLocation = response.Headers.GetValues("Operation-Location").FirstOrDefault()
             };
             await _imageUploaded.CreateImageUploaded(imageUploaded);
-            var imageUploadeds = _imageUploaded.GetImageUploaded("1");
+            var imageUploadeds = _imageUploaded.GetImageUploadeds("1");
             return View(imageUploadeds);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var imageUploaded = _imageUploaded.GetImageUploaded(id);
+            if (imageUploaded == null)
+            {
+                return NotFound();
+            }
+            var operationLocation = imageUploaded.OperationLocation;
+            var client = new HttpClient();
+
+            // Request headers
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
+            
+            HttpResponseMessage response;
+            
+            response = await client.GetAsync(operationLocation);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            ViewData["data"] = responseBody;
+            return View();
         }
     }
 }

@@ -22,9 +22,14 @@ namespace JotFinalProject.Models.Services
             await _context.SaveChangesAsync();
         }
 
-        public List<ImageUploaded> GetImageUploaded(string userId)
+        public List<ImageUploaded> GetImageUploadeds(string userId)
         {
             return  _context.ImageUploadeds.Where(x => x.UserId.Equals(userId)).ToList();
+        }
+
+        public ImageUploaded GetImageUploaded(int id)
+        {
+            return _context.ImageUploadeds.FirstOrDefault(x => x.Id == id);
         }
     }
 }

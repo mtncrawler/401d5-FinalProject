@@ -8,10 +8,13 @@ namespace JotFinalProject.Models.Interfaces
     public interface IImageUploaded
     {
         
-            //Create
-            Task CreateImageUploaded(ImageUploaded imageUploaded);
+        //Create
+        Task CreateImageUploaded(ImageUploaded imageUploaded);
 
-            //Read
-            List<ImageUploaded> GetImageUploaded(string userId);
+        //Read
+        List<ImageUploaded> GetImageUploadeds(string userId);
+
+        //Get One Object
+        ImageUploaded GetImageUploaded(int id);
     }
 }

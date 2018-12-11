@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -34,7 +37,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ImageUrl)
                 </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
             </tr>
+            
         }
     </tbody>
 </table>
