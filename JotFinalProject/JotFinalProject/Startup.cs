@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JotFinalProject.Controllers;
 using JotFinalProject.Data;
 using JotFinalProject.Models;
+using JotFinalProject.Models.Interfaces;
+using JotFinalProject.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +32,7 @@ namespace JotFinalProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            HomeController.apiKey = Configuration["Api:Key"];
             services.AddMvc();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -40,10 +44,12 @@ namespace JotFinalProject
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<JotDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddTransient<IImageUploaded, ImageUploadedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
