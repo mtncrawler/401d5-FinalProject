@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,9 +10,46 @@ using JotFinalProject.Models;
 using JotFinalProject.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JotFinalProject.Controllers
 {
+    public partial class Welcome
+    {
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("recognitionResult")]
+        public RecognitionResult RecognitionResult { get; set; }
+    }
+
+    public partial class RecognitionResult
+    {
+        [JsonProperty("lines")]
+        public Line[] Lines { get; set; }
+    }
+
+    public partial class Line
+    {
+        [JsonProperty("boundingBox")]
+        public long[] BoundingBox { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("words")]
+        public Word[] Words { get; set; }
+    }
+
+    public partial class Word
+    {
+        [JsonProperty("boundingBox")]
+        public long[] BoundingBox { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+    }
+
     public class HomeController : Controller
     {
         public static string apiKey { get; set; }
@@ -68,8 +106,18 @@ namespace JotFinalProject.Controllers
             
             response = await client.GetAsync(operationLocation);
             response.EnsureSuccessStatusCode();
+
             string responseBody = await response.Content.ReadAsStringAsync();
-            ViewData["data"] = responseBody;
+            var apiReponseBody = JsonConvert.DeserializeObject<Welcome>(responseBody);
+
+            string output = null;
+            foreach (var item in apiReponseBody.RecognitionResult.Lines)
+            {
+                output += item.Text;
+            }
+
+            ViewData["data"] = output;
+            
             return View();
         }
     }
