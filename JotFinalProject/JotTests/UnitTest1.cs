@@ -33,6 +33,32 @@ namespace JotTests
         }
 
         /// <summary>
+        /// Test to get a category id
+        /// </summary>
+        [Fact]
+        public void TestToGetCategoryID()
+        {
+            Category category = new Category();
+            category.ID = 1;
+
+            Assert.Equal(1, category.ID);
+        }
+
+        /// <summary>
+        /// Test to set a category id
+        /// </summary>
+        [Fact]
+        public void TestToSetCategoryID()
+        {
+            Category category = new Category();
+            category.ID = 1;
+
+            category.ID = 2;
+
+            Assert.Equal(2, category.ID);
+        }
+
+        /// <summary>
         /// Test to get an image url
         /// </summary>
         [Fact]
@@ -97,19 +123,44 @@ namespace JotTests
         }
 
         /// <summary>
-        /// Test to set note id
+        /// Test to set note text
         /// </summary>
         [Fact]
         public void TestToSetNoteText()
         {
             Note note = new Note();
-            note.ID = 1;
+            note.Text = "Test text string";
 
-            note.ID = 2;
+            note.Text = "Second text string";
 
-            Assert.Equal(2, note.ID);
+            Assert.Equal("Second text string", note.Text);
         }
 
+        /// <summary>
+        /// Test to get note userid
+        /// </summary>
+        [Fact]
+        public void TestToGetNoteUserID()
+        {
+            Note note = new Note();
+            note.UserID = 12;
+
+            Assert.Equal(12, note.UserID);
+        }
+
+        /// <summary>
+        /// Test to set note userid
+        /// </summary>
+        [Fact]
+        public void TestToSetNoteUserID()
+        {
+            Note note = new Note();
+            note.UserID = 12;
+
+            note.UserID = 22;
+
+            Assert.Equal(22, note.UserID);
+        }
 
     }
 }
