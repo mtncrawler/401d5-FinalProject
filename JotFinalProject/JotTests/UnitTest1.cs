@@ -1,0 +1,119 @@
+using JotFinalProject.Models;
+using System;
+using Xunit;
+
+namespace JotTests
+{
+    public class UnitTest1
+    {
+        /// <summary>
+        /// Test to get a category name
+        /// </summary>
+        [Fact]
+        public void TestToGetCategoryName()
+        {
+            Category category = new Category();
+            category.Name = "Test Category";
+
+            Assert.Equal("Test Category", category.Name);
+        }
+
+        /// <summary>
+        /// Test to set a category title
+        /// </summary>
+        [Fact]
+        public void TestToSetCategoryName()
+        {
+            Category category = new Category();
+            category.Name = "Test Cateogry";
+
+            category.Name = "Test Category 2";
+
+            Assert.Equal("Test Category 2", category.Name);
+        }
+
+        /// <summary>
+        /// Test to get an image url
+        /// </summary>
+        [Fact]
+        public void TestToGetImageUrl()
+        {
+            ImageUploaded image = new ImageUploaded();
+            image.ImageUrl = "testimage.png";
+
+            Assert.Equal("testimage.png", image.ImageUrl);
+        }
+
+        /// <summary>
+        /// Test to set an image url
+        /// </summary>
+        [Fact]
+        public void TestToSetImageUrl()
+        {
+            ImageUploaded image = new ImageUploaded();
+            image.ImageUrl = "testimage.png";
+
+            image.ImageUrl = "testimage2.png";
+
+            Assert.Equal("testimage2.png", image.ImageUrl);
+        }
+
+        /// <summary>
+        /// Test to get note id
+        /// </summary>
+        [Fact]
+        public void TestToGetNoteID()
+        {
+            Note note = new Note();
+            note.ID = 1;
+
+            Assert.Equal(1, note.ID);
+        }
+
+        /// <summary>
+        /// Test to set note id
+        /// </summary>
+        [Fact]
+        public void TestToSetNoteID()
+        {
+            Note note = new Note();
+            note.ID = 1;
+
+            note.ID = 2;
+
+            Assert.Equal(2, note.ID);
+        }
+
+        /// <summary>
+        /// Test to get note text
+        /// </summary>
+        [Fact]
+        public void TestToGetNoteText()
+        {
+            Note note = new Note();
+            note.Text = "Test text string";
+
+            Assert.Equal("Test text string", note.Text);
+        }
+
+        /// <summary>
+        /// Test to set note id
+        /// </summary>
+        [Fact]
+        public void TestToSetNoteText()
+        {
+            Note note = new Note();
+            note.ID = 1;
+
+            note.ID = 2;
+
+            Assert.Equal(2, note.ID);
+        }
+
+
+    }
+}
+
+
+
+
