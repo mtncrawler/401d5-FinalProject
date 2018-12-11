@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<JotFinalProject.Models.ImageUploaded>
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+@{ 
+    ViewData["Title"] = "Jot";
+    Layout = "_Layout";
 }
 
 <h1>Hello! Wanna Jot?</h1>
@@ -41,7 +40,7 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
             </tr>
-            
+
         }
     </tbody>
 </table>
