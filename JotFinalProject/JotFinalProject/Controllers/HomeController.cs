@@ -43,10 +43,9 @@ namespace JotFinalProject.Controllers
                 output.Append(Environment.NewLine);
             }
             imageUploaded.Note.Text = output.ToString();
-            _note.UpdateNote(imageUploaded.Note);
-            //ViewData["data"] = output;
-
-            return View(apiReponseBody);
+            await _note.UpdateNote(imageUploaded.Note);
+            var note = _note.GetNote(imageUploaded.Note.ID);
+            return View(note);
         }
     }
 }

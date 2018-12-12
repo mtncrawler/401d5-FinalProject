@@ -15,8 +15,11 @@ namespace JotFinalProject.Models.Services
         {
             _context = context;
         }
-
-        public async void UpdateNote(Note note)
+        public Note GetNote(int id)
+        {
+            return _context.Notes.FirstOrDefault(x => x.ID == id);
+        }
+        public async Task UpdateNote(Note note)
         {
             var n = _context.Notes.FirstOrDefault(x => x.ID == note.ID);
             n = note;

@@ -7,6 +7,8 @@ namespace JotFinalProject.Models.Interfaces
 {
     public interface INote
     {
-        void UpdateNote(Note note);
+        Task UpdateNote(Note note);
+
+        Note GetNote(int id);
     }
 }
