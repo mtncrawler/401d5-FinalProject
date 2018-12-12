@@ -56,7 +56,7 @@ namespace JotFinalProject.Controllers
         // POST: Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title")] Category category)
+        public async Task<IActionResult> Create([Bind("ID,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
