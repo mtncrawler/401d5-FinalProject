@@ -50,6 +50,7 @@ namespace JotFinalProject
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
+            services.AddTransient<ICategory, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

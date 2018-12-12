@@ -19,14 +19,14 @@ namespace JotFinalProject.Models.Services
 
         public async Task AddCategory(Category newCategory)
         {
-            _context.Categories.Add(newCategory);
+            _context.Category.Add(newCategory);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteCategory(int id)
         {
             Category category = await GetCategory(id);
-            _context.Categories.Remove(category);
+            _context.Category.Remove(category);
             await _context.SaveChangesAsync();
         }
 
@@ -38,17 +38,17 @@ namespace JotFinalProject.Models.Services
 
         public async Task<List<Category>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Category.ToListAsync();
         }
 
         public async Task<Category> GetCategory(int? id)
         {
-            return await _context.Categories.FirstOrDefaultAsync(cat => cat.ID == id);
+            return await _context.Category.FirstOrDefaultAsync(cat => cat.ID == id);
         }
 
         public async Task UpdateCategory(Category updateCategory)
         {
-            _context.Categories.Update(updateCategory);
+            _context.Category.Update(updateCategory);
             await _context.SaveChangesAsync();
         }
     }
