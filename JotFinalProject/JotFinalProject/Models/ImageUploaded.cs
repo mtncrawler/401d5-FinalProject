@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,22 +18,23 @@ namespace JotFinalProject.Models
         public string ImageUrl { get; set; }
     }
 
-    public partial class Welcome
-    {
+    public partial class ApiResults
+    { 
         [JsonProperty("status")]
         public string Status { get; set; }
 
         [JsonProperty("recognitionResult")]
-        public RecognitionResult RecognitionResult { get; set; }
+        public ApiRecognitionResult RecognitionResult { get; set; }
     }
 
-    public partial class RecognitionResult
+    public partial class ApiRecognitionResult
     {
         [JsonProperty("lines")]
-        public Line[] Lines { get; set; }
+        public ApiLine[] Lines { get; set; }
+
     }
 
-    public partial class Line
+    public partial class ApiLine
     {
         [JsonProperty("boundingBox")]
         public long[] BoundingBox { get; set; }
@@ -41,10 +43,10 @@ namespace JotFinalProject.Models
         public string Text { get; set; }
 
         [JsonProperty("words")]
-        public Word[] Words { get; set; }
+        public ApiWord[] Words { get; set; }
     }
 
-    public partial class Word
+    public partial class ApiWord
     {
         [JsonProperty("boundingBox")]
         public long[] BoundingBox { get; set; }

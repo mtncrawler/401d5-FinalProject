@@ -1,9 +1,18 @@
 ﻿@using JotFinalProject.Models
+@model JotFinalProject.Models.ApiResults
 @{
     Layout = "_Layout";
 }
 
-<img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px"/>
-<p style="text-align: center; font-size: 18px; margin: 3px;">
-    @ViewData["data"]
-</p>
+<img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px; display: inline-block" />
+
+<div style="display: inline-block;">
+
+    @foreach (var item in Model.RecognitionResult.Lines)
+    {
+        <p style ="font-size: 18px; margin: 3px;">
+            @item.Text
+        </p>
+    }
+
+</div>
