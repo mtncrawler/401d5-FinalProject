@@ -16,6 +16,8 @@ namespace JotFinalProject.Models
         public string OperationLocation { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public Note Note { get; set; }
     }
 
     public partial class ApiResults

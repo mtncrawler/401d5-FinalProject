@@ -1,18 +1,21 @@
 ﻿@using JotFinalProject.Models
-@model JotFinalProject.Models.ApiResults
+@model JotFinalProject.Models.Note
 @{
     Layout = "_Layout";
 }
+<div style="display:flex;">
+    <div>
+        <img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px;" />
+    </div>
 
-<img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px; display: inline-block" />
-
-<div style="display: inline-block;">
-
-    @foreach (var item in Model.RecognitionResult.Lines)
-    {
-        <p style ="font-size: 18px; margin: 3px;">
-            @item.Text
-        </p>
-    }
-
+    <div>
+        <form asp-controller="Home" asp-action="Details" method="post">
+            <input hidden asp-for="ID" value="@Model.ID" />
+            <input hidden asp-for="UserID" value="@Model.UserID"/>
+            <textarea asp-for="Text" rows="20" cols="50">
+                @Model.Text
+            </textarea>
+            <button>Save</button>
+        </form>
+    </div>
 </div>

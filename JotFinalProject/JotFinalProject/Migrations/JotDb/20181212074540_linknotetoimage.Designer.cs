@@ -4,14 +4,16 @@ using JotFinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JotFinalProject.Migrations.JotDb
 {
     [DbContext(typeof(JotDbContext))]
-    partial class JotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181212074540_linknotetoimage")]
+    partial class linknotetoimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +65,7 @@ namespace JotFinalProject.Migrations.JotDb
 
                     b.Property<string>("Text");
 
-                    b.Property<string>("UserID");
+                    b.Property<int>("UserID");
 
                     b.HasKey("ID");
 
