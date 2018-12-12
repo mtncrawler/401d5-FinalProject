@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using JotFinalProject.Data;
 using JotFinalProject.Models;
@@ -35,7 +36,7 @@ namespace JotFinalProject.Controllers
             return View();
         }
 
-        /// <returns>Complted profile</returns>
+        /// <returns>Completed profile</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
@@ -56,9 +57,12 @@ namespace JotFinalProject.Controllers
 
                 if (result.Succeeded)
                 {
+                    Claim nameClaim = new Claim("FirstName", $"{user.FirstName}");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    
+
+                    await _userManager.AddClaimAsync(user, nameClaim);
+
                     var roles = await _userManager.GetRolesAsync(user);
                     
                     return RedirectToAction("Index", "Home");
@@ -101,7 +105,7 @@ namespace JotFinalProject.Controllers
 
                 if (result.Succeeded)
                 {                 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Note");
                 }
                 else
                 {
