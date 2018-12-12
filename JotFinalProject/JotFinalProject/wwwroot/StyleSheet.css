@@ -34,3 +34,11 @@ h1 {
     transition: 0.7s all linear;
     height: 100%;
 }
+
+input {
+    padding: 4px;
+}
+
+label {
+    padding: 4px;
+}
