@@ -143,9 +143,9 @@ namespace JotTests
         public void TestToGetNoteUserID()
         {
             Note note = new Note();
-            note.UserID = 12;
+            note.UserID = "12";
 
-            Assert.Equal(12, note.UserID);
+            Assert.Equal("12", note.UserID);
         }
 
         /// <summary>
@@ -155,11 +155,11 @@ namespace JotTests
         public void TestToSetNoteUserID()
         {
             Note note = new Note();
-            note.UserID = 12;
+            note.UserID = "12";
 
-            note.UserID = 22;
+            note.UserID = "22";
 
-            Assert.Equal(22, note.UserID);
+            Assert.Equal("22", note.UserID);
         }
 
     }

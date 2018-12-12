@@ -9,7 +9,7 @@ namespace JotFinalProject.Models
     {
         public int ID { get; set; }
 
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         public string Text { get; set; }
 
