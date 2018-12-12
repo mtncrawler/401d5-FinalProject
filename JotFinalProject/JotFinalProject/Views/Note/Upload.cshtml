@@ -6,10 +6,16 @@
 
 
 <form asp-action="TestBlob" asp-controller="Note" method="post">
-<button type="submit">Image</button>
+    <button type="submit">Image</button>
 </form>
 
-<form method="post" enctype="multipart/form-data" asp-controller="Note" asp-action="Post">
+<form method="post" enctype="multipart/form-data" asp-controller="Note" asp-action="TestBlob">
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="fileName">File Name</label>
+            <input type="text" name="fileName" id="fileName"/>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-10">
             <p>Upload one file using this form:</p>
