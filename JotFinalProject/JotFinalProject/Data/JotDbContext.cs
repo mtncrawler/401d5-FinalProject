@@ -15,7 +15,7 @@ namespace JotFinalProject.Data
         }
 
         public DbSet<Note> Notes { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<ImageUploaded> ImageUploadeds { get; set; }
     }
 }

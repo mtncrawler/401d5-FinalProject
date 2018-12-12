@@ -1,7 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Category";
+﻿@model IEnumerable<JotFinalProject.Models.Category>
+@{
+    ViewData["Title"] = "Categories";
     Layout = "_Layout";
 }
 
-<h2>Category</h2>
+<h2>Categories</h2>
+
+<a class="btn btn-secondary mb-5" href="category/create" type="button">Create New Category</a>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit Category Name</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete Category</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 

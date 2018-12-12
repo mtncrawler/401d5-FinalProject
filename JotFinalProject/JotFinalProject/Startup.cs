@@ -38,14 +38,15 @@ namespace JotFinalProject
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<JotDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionDb")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("UsersDb")));
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
             services.AddTransient<ICognitive, CognitiveService>();
             services.AddTransient<INote, NoteService>();
+            services.AddTransient<ICategory, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
