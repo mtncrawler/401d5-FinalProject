@@ -22,7 +22,7 @@ h3 {
     border-radius: 0;
     border: none;
     margin-bottom: 0;
-    min-height: 80px;
+    min-height: 60px;
 }
 
 .nav li {
@@ -32,10 +32,9 @@ h3 {
 
 .navbar-inverse .navbar-nav > li > a {
     color: #ffffff;
-    font-family: Lato;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 300;
-    padding: 30px 25px 33px 25px;
+    padding: 20px 25px 22px 25px;
 }
 
 .navbar-inverse .navbar-nav li a:hover {
