@@ -1,5 +1,6 @@
 ﻿using JotFinalProject.Data;
 using JotFinalProject.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,12 @@ namespace JotFinalProject.Models.Services
 
         public List<ImageUploaded> GetImageUploadeds(string userId)
         {
-            return  _context.ImageUploadeds.Where(x => x.UserId.Equals(userId)).ToList();
+            return  _context.ImageUploadeds.Include(x => x.Note).Where(x => x.UserId.Equals(userId)).ToList();
         }
 
         public ImageUploaded GetImageUploaded(int id)
         {
-            return _context.ImageUploadeds.FirstOrDefault(x => x.Id == id);
+            return _context.ImageUploadeds.Include(x => x.Note).FirstOrDefault(x => x.Id == id);
         }
     }
 }

@@ -45,6 +45,7 @@ namespace JotFinalProject
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
             services.AddTransient<ICognitive, CognitiveService>();
+            services.AddTransient<INote, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -31,7 +31,8 @@ namespace JotFinalProject.Models.Services
             {
                 UserId = "1",
                 ImageUrl = imageUrl,
-                OperationLocation = response.Headers.GetValues("Operation-Location").FirstOrDefault()
+                OperationLocation = response.Headers.GetValues("Operation-Location").FirstOrDefault(),
+                Note = new Note { UserID = "1" }
             };
 
             return imageUploaded;

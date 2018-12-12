@@ -10,11 +10,13 @@ namespace JotFinalProject.Controllers
     {
         private readonly IImageUploaded _imageUploaded;
         private readonly ICognitive _cognitive;
+        private readonly INote _note;
 
-        public HomeController(IImageUploaded imageUploaded, ICognitive cognitive)
+        public HomeController(IImageUploaded imageUploaded, ICognitive cognitive, INote note)
         {
             _imageUploaded = imageUploaded;
             _cognitive = cognitive;
+            _note = note;
         } 
 
         public async Task<IActionResult> Index()
@@ -40,6 +42,8 @@ namespace JotFinalProject.Controllers
                 output.Append(item.Text);
                 output.Append(Environment.NewLine);
             }
+            imageUploaded.Note.Text = output.ToString();
+            _note.UpdateNote(imageUploaded.Note);
             //ViewData["data"] = output;
 
             return View(apiReponseBody);
