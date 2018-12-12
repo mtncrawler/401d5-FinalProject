@@ -9,6 +9,10 @@ h1 {
     font-size: 3em;
 }
 
+h3 {
+    text-align: center;
+}
+
 .navbar, .navbar-inverse {
     border-radius: 0;
     border: none;
@@ -37,6 +41,13 @@ h1 {
 
 input {
     padding: 4px;
+}
+
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
 
 label {
