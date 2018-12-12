@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using JotFinalProject.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,12 +34,12 @@ namespace JotFinalProject.Controllers
             }
 
             var apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
-            //string output = null;
-            //foreach (var item in apiReponseBody.RecognitionResult.Lines)
-            //{
-            //    output += item.Text + " ";
-            //}
-
+            StringBuilder output = new StringBuilder();
+            foreach (var item in apiReponseBody.RecognitionResult.Lines)
+            {
+                output.Append(item.Text);
+                output.Append(Environment.NewLine);
+            }
             //ViewData["data"] = output;
 
             return View(apiReponseBody);

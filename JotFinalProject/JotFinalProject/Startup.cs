@@ -41,7 +41,7 @@ namespace JotFinalProject
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
             services.AddTransient<ICognitive, CognitiveService>();
