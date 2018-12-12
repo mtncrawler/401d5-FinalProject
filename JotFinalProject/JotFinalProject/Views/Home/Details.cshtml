@@ -1,9 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using JotFinalProject.Models
+@model JotFinalProject.Models.ApiResults
 @{
+    Layout = "_Layout";
 }
 
-<div>
-    @ViewData["data"]
+<img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px; display: inline-block" />
+
+<div style="display: inline-block;">
+
+    @foreach (var item in Model.RecognitionResult.Lines)
+    {
+        <p style ="font-size: 18px; margin: 3px;">
+            @item.Text
+        </p>
+    }
+
 </div>

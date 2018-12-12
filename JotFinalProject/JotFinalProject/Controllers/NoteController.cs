@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using JotFinalProject.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace JotFinalProject.Controllers
 {
     public class NoteController : Controller
     {
+        IConfiguration _configuration;
+        IHostingEnvironment _environment;
+
+        public NoteController(IConfiguration configuration, IHostingEnvironment environment)
+        {
+            _configuration = configuration;
+            _environment = environment;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -21,7 +33,7 @@ namespace JotFinalProject.Controllers
         }
 
         [HttpPost("UploadFiles")]
-        public async Task<IActionResult> Post(IFormFile file)
+        public async Task<string> Post(IFormFile file)
         {
             long size = file.Length;
 
@@ -39,7 +51,27 @@ namespace JotFinalProject.Controllers
             // process uploaded files
             // Don't rely on or trust the FileName property without validation.
 
-            return Ok(new { count = 1, size, filePath });
+            //return Ok(new { count = 1, size, filePath });
+
+            return filePath;
+        }
+
+        public async void TestBlob(IFormFile file, string fileName)
+        {
+            var filePath = await Post(file);
+
+            Blob blob = new Blob(_configuration["BlobStorageAccountName"], _configuration["BlobStorageKey"]);
+
+            var mycontainer = await blob.GetContainer("jotnotes");
+
+
+            //var image = blob.GetBlob("AboutMe.PNG", "jotnotes");
+
+            //string imageURL = image.Uri.ToString();
+
+            //string filepath = $"{_environment.WebRootPath}\\Images\\testImage.jpg";
+
+            blob.UploadFile(mycontainer, fileName, filePath);
         }
     }
 }
