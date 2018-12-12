@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using JotFinalProject.Models;
 using JotFinalProject.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,16 +36,27 @@ namespace JotFinalProject.Controllers
                 return NotFound();
             }
 
-            var apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
-            StringBuilder output = new StringBuilder();
-            foreach (var item in apiReponseBody.RecognitionResult.Lines)
+            if (imageUploaded.Note.Text == null)
             {
-                output.Append(item.Text);
-                output.Append(Environment.NewLine);
+                var apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
+                StringBuilder output = new StringBuilder();
+                foreach (var item in apiReponseBody.RecognitionResult.Lines)
+                {
+                    output.Append(item.Text);
+                    output.Append(Environment.NewLine);
+                }
+                imageUploaded.Note.Text = output.ToString();
+                await _note.UpdateNote(imageUploaded.Note);
             }
-            imageUploaded.Note.Text = output.ToString();
-            await _note.UpdateNote(imageUploaded.Note);
+
             var note = _note.GetNote(imageUploaded.Note.ID);
+            return View(note);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Details(Note note)
+        {
+            await _note.UpdateNote(note);
             return View(note);
         }
     }

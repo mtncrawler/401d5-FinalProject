@@ -9,8 +9,13 @@
     </div>
 
     <div>
-        <textarea rows="20" cols="50">
-            @Model.Text
-        </textarea>
+        <form asp-controller="Home" asp-action="Details" method="post">
+            <input hidden asp-for="ID" value="@Model.ID" />
+            <input hidden asp-for="UserID" value="@Model.UserID"/>
+            <textarea asp-for="Text" rows="20" cols="50">
+                @Model.Text
+            </textarea>
+            <button>Save</button>
+        </form>
     </div>
 </div>

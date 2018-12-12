@@ -21,8 +21,7 @@ namespace JotFinalProject.Models.Services
         }
         public async Task UpdateNote(Note note)
         {
-            var n = _context.Notes.FirstOrDefault(x => x.ID == note.ID);
-            n = note;
+             _context.Notes.Update(note);
             await _context.SaveChangesAsync();
         }
     }
