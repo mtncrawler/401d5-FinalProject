@@ -4,7 +4,7 @@
     Layout = "_Layout";
 }
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this category?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -19,8 +19,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-default" />
-        @*<a asp-action="Index"><h6 class="d-inline">Back to Categories</h6></a>*@
-
-        <a asp-action="Index"><button class="btn btn-default">Cancel</button></a>
     </form>
+    <a asp-action="Index"><button class="btn btn-default">Cancel</button></a>
+    <a asp-action="Index"><h6 class="d-inline">Back to Categories</h6></a>
 </div>

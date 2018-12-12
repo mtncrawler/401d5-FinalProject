@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a asp-controller="Notes" asp-action="Browse" asp-route-id="@Model.ID"><h6 class="d-inline ml-4 mr-4">Note Library</h6></a>
+    <a asp-controller="Notes" asp-action="GetNote" asp-route-id="@Model.ID"><h6 class="d-inline ml-4 mr-4">Note Library</h6></a>
     <a asp-action="Index"><h6 class="d-inline ml-4">Back to Categories</h6></a>
 </p>
 
@@ -17,24 +17,24 @@
         {
             <div class="col-md-4 mb-5">
                 <div class="p-4 preview-cards position-relative h-100">
-                    <h4>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
-                    </h4>
+                    @*<h4>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </h4>*@
                     <span class="badge badge-primary mb-4" id="@Html.DisplayFor(modelItem => item.Text)">
                         @Html.DisplayFor(modelItem => item.Text)
                     </span>
-                    <a asp-action="Details" asp-controller="FullSnippets" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
+                    <a asp-action="Details" asp-controller="Notes" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
                 </div>
             </div>
         }
 
-        <div class="col-md-4 mb-5">
+        @*<div class="col-md-4 mb-5">
             <a asp-controller="FullSnippets" id="dont-do-stuff" asp-action="Create" asp-route-id="@Model.ID">
                 <div class="p-4 preview-cards position-relative h-100 bg-primary add-category-card">
                     <h1 style="font-size: 4.5em" class="text-center align-middle text-white mt-5">&#43;</h1>
                 </div>
             </a>
-        </div>
+        </div>*@
     </div>
 </div>
 
