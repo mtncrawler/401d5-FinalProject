@@ -5,7 +5,6 @@
 }
 
 <p>
-    <a asp-controller="Notes" asp-action="GetNote" asp-route-id="@Model.ID"><h6 class="d-inline ml-4 mr-4">Note Library</h6></a>
     <a asp-action="Index"><h6 class="d-inline ml-4">Back to Categories</h6></a>
 </p>
 
@@ -17,9 +16,9 @@
         {
             <div class="col-md-4 mb-5">
                 <div class="p-4 preview-cards position-relative h-100">
-                    @*<h4>
+                    <h4>
                         @Html.DisplayFor(modelItem => item.Title)
-                    </h4>*@
+                    </h4>
                     <span class="badge badge-primary mb-4" id="@Html.DisplayFor(modelItem => item.Text)">
                         @Html.DisplayFor(modelItem => item.Text)
                     </span>

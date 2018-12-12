@@ -61,7 +61,7 @@ namespace JotFinalProject.Controllers
             if (ModelState.IsValid)
             {
                 await _context.AddCategory(category);
-                return RedirectToAction("Details", new { id = category.ID });
+                return RedirectToAction("Index");
             }
             return View(category);
         }

@@ -38,10 +38,10 @@ namespace JotFinalProject
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<JotDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionDb")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("UsersDb")));
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
             services.AddTransient<ICognitive, CognitiveService>();
