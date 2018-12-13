@@ -4,26 +4,25 @@
 }
 
 
-<form asp-action="TestBlob" asp-controller="Note" method="post">
-    <button type="submit">Image</button>
-</form>
+<form class="form-signin" method="post" enctype="multipart/form-data" asp-controller="Note" asp-action="TestBlob">
 
-<form method="post" enctype="multipart/form-data" asp-controller="Note" asp-action="TestBlob">
-    <div class="form-group">
-        <div class="col-md-10">
-            <label for="fileName">File Name</label>
-            <input type="text" name="fileName" id="fileName"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Upload your image</p>
-            <input type="file" name="file" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Upload" />
-        </div>
-    </div>
+    <label for="category">Category</label>
+    <select class="form-control" name="categoryID">
+        @foreach (var item in ViewBag.Categories)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select>
+
+    <label for="fileName">File Name</label>
+    <input class="form-control" type="text" name="fileName" id="fileName" />
+
+    <p>Upload your image</p>
+    <span class="btn btn-default btn-file">
+        <input  type="file" name="file" />
+    </span>
+    <div><br ></div>
+
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Upload" />
+
 </form>
