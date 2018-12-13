@@ -1,4 +1,6 @@
+using JotFinalProject.Data;
 using JotFinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using Xunit;
 
@@ -161,6 +163,54 @@ namespace JotTests
 
             Assert.Equal("22", note.UserID);
         }
+
+
+        ///// <summary>
+        ///// Test to create and read category
+        ///// </summary>
+        //[Fact]
+        //public async void TestCreateCategory()
+        //{
+        //    DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("AddCategory").Options;
+
+        //    using (JotDbContext context = new JotDbContext(options))
+        //    {
+        //        Category category = new Category();
+        //        category.Name = "TestCategory";
+
+        //        context.Category.Add(category);
+        //        context.SaveChanges();
+
+        //        var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+
+        //        Assert.Equal("TestCategory", category.Name);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Test to update category
+        ///// </summary>
+        //[Fact]
+        //public async void TestUpdateCategory()
+        //{
+        //    DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
+
+        //    using (JotDbContext context = new JotDbContext(options))
+        //    {
+        //        Category category = new Category();
+        //        category.Name = "Test";
+        //        category.Name = "Test2";
+
+        //        context.Update(category);
+        //        context.SaveChanges();
+
+        //        var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+
+        //        Assert.Equal("Test2", category.Name);
+        //    }
+        //}
+
+
 
     }
 }
