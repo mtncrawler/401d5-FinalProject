@@ -10,10 +10,9 @@ namespace JotFinalProject.Models.Services
 {
     public class CognitiveService : ICognitive
     {
-        public static string apiKey { get; set; }
+        public static string ApiKey { get; set; }
         private readonly IImageUploaded _imageUpload;
-
-
+        
         public CognitiveService(IImageUploaded imageUpload)
         {
             _imageUpload = imageUpload;
@@ -24,29 +23,35 @@ namespace JotFinalProject.Models.Services
             var client = new HttpClient();
 
             // Request headers
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ApiKey);
 
             // Request parameters
             var uri = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/recognizeText?mode=Printed";
+            
+            StringContent content = generateBody(imageUrl);
+            HttpResponseMessage response = await client.PostAsync(uri, content);
+            
+            return await SaveUploadedImage(userID, imageUrl, response.Headers.GetValues("Operation-Location").FirstOrDefault());
+        }
 
-            HttpResponseMessage response;
-            //var imageUrl = "http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG";
-
-            var body = new { url = imageUrl };
-
-            var content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
-            response = await client.PostAsync(uri, content);
+        private async Task<ImageUploaded> SaveUploadedImage(string userID, string imageUrl, string operationLocation)
+        {
             var imageUploaded = new ImageUploaded()
             {
                 UserId = userID,
                 ImageUrl = imageUrl,
-                OperationLocation = response.Headers.GetValues("Operation-Location").FirstOrDefault(),
+                OperationLocation = operationLocation,
                 Note = new Note { UserID = userID }
             };
 
             await _imageUpload.CreateImageUploaded(imageUploaded);
-
             return imageUploaded;
+        }
+
+        private StringContent generateBody(string imageUrl)
+        {
+            var body = new { url = imageUrl };
+            return new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
         }
 
         public async Task<ApiResults> GetContentFromOperationLocation(ImageUploaded imageUploaded)
@@ -55,27 +60,27 @@ namespace JotFinalProject.Models.Services
             var client = new HttpClient();
 
             // Request headers
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
-
-            HttpResponseMessage response;
-
-            response = await client.GetAsync(operationLocation);
-            response.EnsureSuccessStatusCode();
-
-            ApiResults apiReponseBody = JsonConvert.DeserializeObject<ApiResults>(await TaskTest(response));
-
-            var result = apiReponseBody.RecognitionResult.Lines;
-
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ApiKey);
+            ApiResults apiReponseBody = await GetResult(client, operationLocation);
 
             return apiReponseBody;
         }
 
-       async Task<string> TaskTest(HttpResponseMessage response)
+        private async Task<ApiResults> GetResult(HttpClient client, string operationLocation)
         {
-           await Task.Delay(10000);
+            // api call every 5 second until result is either a fail or success
+            while (true)
+            {
+                HttpResponseMessage response = await client.GetAsync(operationLocation);
+                response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
+                ApiResults apiReponseBody = JsonConvert.DeserializeObject<ApiResults>(await response.Content.ReadAsStringAsync());
+                if (apiReponseBody.Status == "Failed" || apiReponseBody.Status == "Succeeded")
+                {
+                    return apiReponseBody;
+                }
+                await Task.Delay(5000);
+            }
         }
 
     }
