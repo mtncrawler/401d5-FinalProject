@@ -28,9 +28,9 @@ namespace JotFinalProject.Models.Services
             return  _context.ImageUploadeds.Include(x => x.Note).Where(x => x.UserId.Equals(userId)).ToList();
         }
 
-        public ImageUploaded GetImageUploaded(int id)
+        public async Task<ImageUploaded> GetImageUploaded(int id)
         {
-            return _context.ImageUploadeds.Include(x => x.Note).FirstOrDefault(x => x.Id == id);
+            return await _context.ImageUploadeds.Include(x => x.Note).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace JotFinalProject.Models.Interfaces
     {
         Task UpdateNote(Note note);
 
-        Note GetNote(int id);
+        Task<Note> GetNote(int id);
     }
 }
