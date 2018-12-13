@@ -4,16 +4,14 @@ using JotFinalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace JotFinalProject.Migrations.JotDb
+namespace JotFinalProject.Migrations
 {
     [DbContext(typeof(JotDbContext))]
-    [Migration("20181212083231_userIdToTypeString")]
-    partial class userIdToTypeString
+    partial class JotDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +27,11 @@ namespace JotFinalProject.Migrations.JotDb
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("UserID");
+
                     b.HasKey("ID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("JotFinalProject.Models.ImageUploaded", b =>
@@ -61,9 +61,11 @@ namespace JotFinalProject.Migrations.JotDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryID");
+                    b.Property<int>("CategoryID");
 
                     b.Property<string>("Text");
+
+                    b.Property<string>("Title");
 
                     b.Property<string>("UserID");
 
@@ -85,7 +87,8 @@ namespace JotFinalProject.Migrations.JotDb
                 {
                     b.HasOne("JotFinalProject.Models.Category", "Category")
                         .WithMany("Notes")
-                        .HasForeignKey("CategoryID");
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
