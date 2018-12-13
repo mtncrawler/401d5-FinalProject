@@ -5,23 +5,24 @@
 
 
 <form class="form-signin" method="post" enctype="multipart/form-data" asp-controller="Note" asp-action="TestBlob">
-    
-            <label for="category">Category</label>
-            <select name="categoryID">
-                @foreach (var item in ViewBag.Categories)
-                {
-                    <option value="@item.ID">@item.Name</option>
-                }
-            </select>
-        
-            <label for="fileName">File Name</label>
-            <input type="text" name="fileName" id="fileName" />
-        
-    
-            <p>Upload your image</p>
-            <input type="file" class="btn" name="file" />
-        
-    
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Upload" />
-        
+
+    <label for="category">Category</label>
+    <select class="form-control" name="categoryID">
+        @foreach (var item in ViewBag.Categories)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select>
+
+    <label for="fileName">File Name</label>
+    <input class="form-control" type="text" name="fileName" id="fileName" />
+
+    <p>Upload your image</p>
+    <span class="btn btn-default btn-file">
+        <input  type="file" name="file" />
+    </span>
+    <div><br ></div>
+
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Upload" />
+
 </form>
