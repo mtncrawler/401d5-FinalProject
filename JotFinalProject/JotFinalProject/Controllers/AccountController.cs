@@ -62,9 +62,7 @@ namespace JotFinalProject.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     await _userManager.AddClaimAsync(user, nameClaim);
-
-                    var roles = await _userManager.GetRolesAsync(user);
-                    
+               
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -113,6 +111,19 @@ namespace JotFinalProject.Controllers
                 }
             }
             return View(lvm);
+        }
+
+        /// <summary>
+        /// Logout page
+        /// </summary>
+        /// <returns>Home page</returns>
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

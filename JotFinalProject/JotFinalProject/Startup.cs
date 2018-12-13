@@ -38,7 +38,7 @@ namespace JotFinalProject
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<JotDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionDb")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
 
@@ -59,14 +59,16 @@ namespace JotFinalProject
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
+            app.UseStaticFiles();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.UseStaticFiles();
         }
     }
 }

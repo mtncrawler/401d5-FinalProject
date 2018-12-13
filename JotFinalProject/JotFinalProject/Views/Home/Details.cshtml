@@ -13,6 +13,8 @@
             <input hidden asp-for="ID" value="@Model.ID" />
             <input hidden asp-for="UserID" value="@Model.UserID"/>
             <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
+            <input asp-for="CategoryID" value="@Model.CategoryID" />
+            <input asp-for="Title" value="Test" />
             <textarea asp-for="Text" rows="20" cols="50">
                 @Model.Text
             </textarea>

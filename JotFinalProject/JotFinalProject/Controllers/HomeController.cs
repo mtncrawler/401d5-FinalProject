@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JotFinalProject.Models;
 using JotFinalProject.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JotFinalProject.Controllers
@@ -12,16 +13,20 @@ namespace JotFinalProject.Controllers
         private readonly IImageUploaded _imageUploaded;
         private readonly ICognitive _cognitive;
         private readonly INote _note;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(IImageUploaded imageUploaded, ICognitive cognitive, INote note)
+        public HomeController(IImageUploaded imageUploaded, ICognitive cognitive, INote note, UserManager<ApplicationUser> userManager)
         {
             _imageUploaded = imageUploaded;
             _cognitive = cognitive;
             _note = note;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
+            var user = _userManager.GetUserAsync(User);
+            ViewBag.User = user;
             var imageUploadeds = _imageUploaded.GetImageUploadeds("1");
             return View(imageUploadeds);
         }
