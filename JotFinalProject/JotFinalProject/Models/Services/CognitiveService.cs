@@ -41,7 +41,7 @@ namespace JotFinalProject.Models.Services
                 UserId = userID,
                 ImageUrl = imageUrl,
                 OperationLocation = operationLocation,
-                Note = new Note { UserID = userID }
+                Note = new Note { UserID = userID , CategoryID = 1 }
             };
 
             await _imageUpload.CreateImageUploaded(imageUploaded);
