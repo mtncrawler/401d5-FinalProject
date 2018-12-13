@@ -1,5 +1,6 @@
 ﻿using JotFinalProject.Data;
 using JotFinalProject.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace JotFinalProject.Models.Services
         {
             _context = context;
         }
-        public Note GetNote(int id)
+        public async Task<Note> GetNote(int id)
         {
-            return _context.Notes.FirstOrDefault(x => x.ID == id);
+            return await _context.Notes.FirstOrDefaultAsync(x => x.ID == id);
         }
         public async Task UpdateNote(Note note)
         {
