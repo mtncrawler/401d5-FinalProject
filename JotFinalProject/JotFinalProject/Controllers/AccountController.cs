@@ -59,9 +59,9 @@ namespace JotFinalProject.Controllers
                 {
                     Claim nameClaim = new Claim("FirstName", $"{user.FirstName}");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
                     await _userManager.AddClaimAsync(user, nameClaim);
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                
                     return RedirectToAction("Index", "Home");
                 }

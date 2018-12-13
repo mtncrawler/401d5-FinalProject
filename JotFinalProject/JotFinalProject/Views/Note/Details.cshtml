@@ -1,8 +1,24 @@
-﻿
+﻿@using JotFinalProject.Models
+@model JotFinalProject.Models.Note
 @{
-    ViewData["Title"] = "Details";
     Layout = "_Layout";
 }
+<div style="display:flex;">
+    <div>
+        <img src="@ViewBag.ImgUrl" style="max-width: 600px;" />
+    </div>
 
-<h2>Details</h2>
-
+    <div>
+        <form asp-controller="Note" asp-action="Details" method="post">
+            <input hidden asp-for="ID" value="@Model.ID" />
+            <input hidden asp-for="UserID" value="@Model.UserID" />
+            <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
+            <input asp-for="CategoryID" value="@Model.CategoryID" />
+            <input asp-for="Title" value="Test" />
+            <textarea asp-for="Text" rows="20" cols="50">
+                @Model.Text
+            </textarea>
+            <button>Save</button>
+        </form>
+    </div>
+</div>

@@ -21,58 +21,60 @@ namespace JotFinalProject.Controllers
             _cognitive = cognitive;
             _note = note;
             _userManager = userManager;
+            _note = note;
         }
 
         public IActionResult Index()
         {
             var user = _userManager.GetUserAsync(User);
-            ViewBag.User = user;
-            var imageUploadeds = _imageUploaded.GetImageUploadeds("1");
+            string ID = user.Id.ToString();
+
+            var imageUploadeds = _imageUploaded.GetImageUploadeds(ID);
             return View(imageUploadeds);
         }
 
-        public async Task<IActionResult> Details(int id)
-        {
-            var imageUploaded = await _imageUploaded.GetImageUploaded(id);
-            if (imageUploaded == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    var imageUploaded = await _imageUploaded.GetImageUploaded(id);
+        //    if (imageUploaded == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (imageUploaded.Note.Text == null)
-            {
-                await GenereateNoteText(imageUploaded);
-            }
-            ViewBag.ImgUrl = imageUploaded.ImageUrl;
-            var note = await _note.GetNote(imageUploaded.Note.ID);
-            return View(note);
-        }
+        //    if (imageUploaded.Note.Text == null)
+        //    {
+        //        await GenereateNoteText(imageUploaded);
+        //    }
+        //    ViewBag.ImgUrl = imageUploaded.ImageUrl;
+        //    var note = await _note.GetNote(imageUploaded.Note.ID);
+        //    return View(note);
+        //}
 
-        private async Task GenereateNoteText(ImageUploaded imageUploaded)
-        {
-            ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
+        //private async Task GenereateNoteText(ImageUploaded imageUploaded)
+        //{
+        //    ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
 
-            imageUploaded.Note.Text = BuildNoteText(apiReponseBody);
-            await _note.UpdateNote(imageUploaded.Note);
-        }
+        //    imageUploaded.Note.Text = BuildNoteText(apiReponseBody);
+        //    await _note.UpdateNote(imageUploaded.Note);
+        //}
 
-        private string BuildNoteText(ApiResults apiReponseBody)
-        {
-            StringBuilder output = new StringBuilder();
-            foreach (var item in apiReponseBody.RecognitionResult.Lines)
-            {
-                output.Append(item.Text);
-                output.Append(Environment.NewLine);
-            }
-            return output.ToString();
-        }
+        //private string BuildNoteText(ApiResults apiReponseBody)
+        //{
+        //    StringBuilder output = new StringBuilder();
+        //    foreach (var item in apiReponseBody.RecognitionResult.Lines)
+        //    {
+        //        output.Append(item.Text);
+        //        output.Append(Environment.NewLine);
+        //    }
+        //    return output.ToString();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> Details(Note note, string imgUrl)
-        {
-            ViewBag.ImgUrl = imgUrl;
-            await _note.UpdateNote(note);
-            return View(note);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Details(Note note, string imgUrl)
+        //{
+        //    ViewBag.ImgUrl = imgUrl;
+        //    await _note.UpdateNote(note);
+        //    return View(note);
+        //}
     }
 }
