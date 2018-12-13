@@ -30,28 +30,30 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i></a></li>
-                        @if (!SignInManager.IsSignedIn(User))
-                        {
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i></a></li>
+                            <li><a asp-controller="Category" asp-action="Index">CATEGORY</a></li>
+                            <li><a asp-controller="Note" asp-action="Upload">NEW NOTE</a></li>
+                            <li><a asp-controller="Account" asp-action="Logout">LOGOUT</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i></a></li>
                             <li><a asp-controller="Account" asp-action="Login">LOGIN</a></li>
-                            <li><a asp-controller="Account" asp-action="Register">REGISTER</a></li>
-                        }
-                        <li><a asp-controller="Category" asp-action="Index">CATEGORY</a></li>
-                        <li><a asp-controller="Note" asp-action="Upload">NEW NOTE</a></li>
-                    </ul>
-                </div>
+                            <li><a asp-controller="Account" asp-action="Register">REGISTER</a></li>                         <li><a asp-controller="Category" asp-action="Index">CATEGORY</a></li>
+                            <li><a asp-controller="Note" asp-action="Upload">NEW NOTE</a></li>
+                        </ul>
+                    </div>
+                }
             </div>
         </nav>
-        @*@if (SignInManager.IsSignedIn(User))
-        {
-            <p>Welcome back, @User.Claims.First(name => name.Type == "FirstName").Value !</p>
-        }
-        else
-        {
-            <p>You are not logged in!</p>
-        }*@
     </header>
 
     <section class="mb-0">
