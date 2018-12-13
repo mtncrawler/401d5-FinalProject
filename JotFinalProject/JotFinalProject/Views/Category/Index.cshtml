@@ -6,23 +6,22 @@
 
 <h2>Categories</h2>
 
-<a class="btn btn-secondary mb-5" href="category/create" type="button">Create New Category</a>
-
-<table class="table">
+<table class="table" border="0" >
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+                    <a class="text" asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit Category Name</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete Category</a>
+                    <a class="linkbut smaller" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <a class="linkbut smaller" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+    <a class="linkbut" href="category/create" type="button">Create New Category</a>
 
 

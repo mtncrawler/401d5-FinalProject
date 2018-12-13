@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <form class="form-signin" action="/Account/Login" method="post">
-            <h3 class="form-signin-heading">Login</h3>
             <div asp-validation-summary="All"></div>
             <label asp-for="Email" class="sr-only"></label>
             <input asp-for="Email" placeholder="Email" class="form-control" />
@@ -18,7 +17,7 @@
             <input asp-for="Password" alt="Password" placeholder="Password" class="form-control" />
             <span asp-validation-for="Password" />
             <br>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">LOGIN</button>
         </form>
     </div>
 </body>
