@@ -41,11 +41,14 @@ namespace JotFinalProject
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+
+            options.UseSqlServer(Configuration.GetConnectionString("UsersDb")));
+
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
             services.AddTransient<ICognitive, CognitiveService>();
             services.AddTransient<INote, NoteService>();
+            services.AddTransient<ICategory, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

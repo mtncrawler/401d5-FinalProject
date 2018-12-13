@@ -1,8 +1,14 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using JotFinalProject.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
 
-<h2>Index</h2>
+<h2>Welcome Back</h2>
+
+
 
