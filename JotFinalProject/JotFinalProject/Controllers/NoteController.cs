@@ -87,7 +87,6 @@ namespace JotFinalProject.Controllers
             //making new imageUploaded from API call
             var newImage = await _cognitive.AnalyzeImage(imageUrl, user.Id);
 
-            //TODO: move details to this controller
             return RedirectToAction("Details", "Note" , new { id = newImage.Id });
         }
 

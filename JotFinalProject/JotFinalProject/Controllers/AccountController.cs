@@ -64,9 +64,9 @@ namespace JotFinalProject.Controllers
                 {
                     Claim nameClaim = new Claim("FirstName", $"{user.FirstName}");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
                     await _userManager.AddClaimAsync(user, nameClaim);
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 
                     // create default category upon registration for a user to add initial notes
                     var getUser = _userManager.GetUserAsync(User);            

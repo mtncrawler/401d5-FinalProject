@@ -33,48 +33,5 @@ namespace JotFinalProject.Controllers
             return View(imageUploadeds);
         }
 
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    var imageUploaded = await _imageUploaded.GetImageUploaded(id);
-        //    if (imageUploaded == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (imageUploaded.Note.Text == null)
-        //    {
-        //        await GenereateNoteText(imageUploaded);
-        //    }
-        //    ViewBag.ImgUrl = imageUploaded.ImageUrl;
-        //    var note = await _note.GetNote(imageUploaded.Note.ID);
-        //    return View(note);
-        //}
-
-        //private async Task GenereateNoteText(ImageUploaded imageUploaded)
-        //{
-        //    ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
-
-        //    imageUploaded.Note.Text = BuildNoteText(apiReponseBody);
-        //    await _note.UpdateNote(imageUploaded.Note);
-        //}
-
-        //private string BuildNoteText(ApiResults apiReponseBody)
-        //{
-        //    StringBuilder output = new StringBuilder();
-        //    foreach (var item in apiReponseBody.RecognitionResult.Lines)
-        //    {
-        //        output.Append(item.Text);
-        //        output.Append(Environment.NewLine);
-        //    }
-        //    return output.ToString();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Details(Note note, string imgUrl)
-        //{
-        //    ViewBag.ImgUrl = imgUrl;
-        //    await _note.UpdateNote(note);
-        //    return View(note);
-        //}
     }
 }
