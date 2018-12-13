@@ -38,7 +38,7 @@ namespace JotFinalProject.Models
             return blob;
         }
 
-        public async void UploadFile(CloudBlobContainer cloudBlobContainer, string fileName, string filePath)
+        public async Task UploadFile(CloudBlobContainer cloudBlobContainer, string fileName, string filePath)
         {
             var blobFile = cloudBlobContainer.GetBlockBlobReference(fileName);
 

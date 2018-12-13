@@ -5,13 +5,14 @@
 }
 <div style="display:flex;">
     <div>
-        <img src="http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG" style="max-width: 600px;" />
+        <img src="@ViewBag.ImgUrl" style="max-width: 600px;" />
     </div>
 
     <div>
         <form asp-controller="Home" asp-action="Details" method="post">
             <input hidden asp-for="ID" value="@Model.ID" />
             <input hidden asp-for="UserID" value="@Model.UserID"/>
+            <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
             <textarea asp-for="Text" rows="20" cols="50">
                 @Model.Text
             </textarea>

@@ -15,6 +15,6 @@ namespace JotFinalProject.Models.Interfaces
         List<ImageUploaded> GetImageUploadeds(string userId);
 
         //Get One Object
-        ImageUploaded GetImageUploaded(int id);
+        Task<ImageUploaded> GetImageUploaded(int id);
     }
 }
