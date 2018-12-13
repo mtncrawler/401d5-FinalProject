@@ -12,6 +12,7 @@
         <form asp-controller="Home" asp-action="Details" method="post">
             <input hidden asp-for="ID" value="@Model.ID" />
             <input hidden asp-for="UserID" value="@Model.UserID"/>
+            <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
             <textarea asp-for="Text" rows="20" cols="50">
                 @Model.Text
             </textarea>

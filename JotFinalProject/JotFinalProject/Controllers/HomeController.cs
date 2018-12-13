@@ -63,8 +63,9 @@ namespace JotFinalProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Details(Note note)
+        public async Task<IActionResult> Details(Note note, string imgUrl)
         {
+            ViewBag.ImgUrl = imgUrl;
             await _note.UpdateNote(note);
             return View(note);
         }
