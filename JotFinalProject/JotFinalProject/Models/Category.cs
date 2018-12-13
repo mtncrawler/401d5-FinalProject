@@ -13,8 +13,6 @@ namespace JotFinalProject.Models
 
         public string Name { get; set; }
 
-        public string UserID { get; set; }
-
         public ICollection<Note> Notes { get; set; }
     }
 }
