@@ -20,10 +20,8 @@ namespace JotFinalProject.Controllers
             _note = note;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var imageUploaded = await _cognitive.AnalyzeImage("http://2.bp.blogspot.com/-jCjNdPcve0U/UbYj7sapwCI/AAAAAAAABY4/IFI2Ix5MezA/s1600/IMG_0127.JPG", "1");
-            //await _imageUploaded.CreateImageUploaded(imageUploaded);
             var imageUploadeds = _imageUploaded.GetImageUploadeds("1");
             return View(imageUploadeds);
         }
@@ -38,25 +36,30 @@ namespace JotFinalProject.Controllers
 
             if (imageUploaded.Note.Text == null)
             {
-                //var apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
-                StringBuilder output = new StringBuilder();
-                ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
-
-                if (apiReponseBody != null)
-                {
-                    foreach (var item in apiReponseBody.RecognitionResult.Lines)
-                    {
-                        output.Append(item.Text);
-                        output.Append(Environment.NewLine);
-                    }
-                    imageUploaded.Note.Text = output.ToString();
-                    await _note.UpdateNote(imageUploaded.Note);
-                }
-
+                await GenereateNoteText(imageUploaded);
             }
-
+            ViewBag.ImgUrl = imageUploaded.ImageUrl;
             var note = await _note.GetNote(imageUploaded.Note.ID);
             return View(note);
+        }
+
+        private async Task GenereateNoteText(ImageUploaded imageUploaded)
+        {
+            ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
+
+            imageUploaded.Note.Text = BuildNoteText(apiReponseBody);
+            await _note.UpdateNote(imageUploaded.Note);
+        }
+
+        private string BuildNoteText(ApiResults apiReponseBody)
+        {
+            StringBuilder output = new StringBuilder();
+            foreach (var item in apiReponseBody.RecognitionResult.Lines)
+            {
+                output.Append(item.Text);
+                output.Append(Environment.NewLine);
+            }
+            return output.ToString();
         }
 
         [HttpPost]
