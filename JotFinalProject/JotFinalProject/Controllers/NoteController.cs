@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using JotFinalProject.Models;
 using JotFinalProject.Models.Interfaces;
@@ -19,15 +20,17 @@ namespace JotFinalProject.Controllers
         IHostingEnvironment _environment;
         IImageUploaded _imageUploaded;
         ICognitive _cognitive;
+        INote _note;
         UserManager<ApplicationUser> _userManager;
 
-        public NoteController(IConfiguration configuration, IHostingEnvironment environment, IImageUploaded imageUploaded, ICognitive cognitive, UserManager<ApplicationUser> userManager)
+        public NoteController(IConfiguration configuration, IHostingEnvironment environment, IImageUploaded imageUploaded, ICognitive cognitive, UserManager<ApplicationUser> userManager, INote note)
         {
             _configuration = configuration;
             _environment = environment;
             _imageUploaded = imageUploaded;
             _cognitive = cognitive;
             _userManager = userManager;
+            _note = note;
         }
 
         public IActionResult Index()
@@ -56,11 +59,6 @@ namespace JotFinalProject.Controllers
                     }
                 }
 
-            // process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-
-            //return Ok(new { count = 1, size, filePath });
-
             return filePath;
         }
 
@@ -73,9 +71,6 @@ namespace JotFinalProject.Controllers
 
             var mycontainer = await blob.GetContainer("jotnotes");
             
-            
-            //string filepath = $"{_environment.WebRootPath}\\Images\\testImage.jpg";
-
             await blob.UploadFile(mycontainer, fileName, filePath);
 
 
@@ -90,10 +85,55 @@ namespace JotFinalProject.Controllers
            var user = await _userManager.GetUserAsync(User);
 
             //making new imageUploaded from API call
-            var newImage = await _cognitive.AnalyzeImage(imageUrl, "1");
+            var newImage = await _cognitive.AnalyzeImage(imageUrl, user.Id);
 
-            return RedirectToAction("Details", "Home" , new { id = newImage.Id });
+            //TODO: move details to this controller
+            return RedirectToAction("Details", "Note" , new { id = newImage.Id });
         }
 
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var imageUploaded = await _imageUploaded.GetImageUploaded(id);
+            if (imageUploaded == null)
+            {
+                return NotFound();
+            }
+
+            if (imageUploaded.Note.Text == null)
+            {
+                await GenereateNoteText(imageUploaded);
+            }
+            ViewBag.ImgUrl = imageUploaded.ImageUrl;
+            var note = await _note.GetNote(imageUploaded.Note.ID);
+            return View(note);
+        }
+
+        private async Task GenereateNoteText(ImageUploaded imageUploaded)
+        {
+            ApiResults apiReponseBody = await _cognitive.GetContentFromOperationLocation(imageUploaded);
+
+            imageUploaded.Note.Text = BuildNoteText(apiReponseBody);
+            await _note.UpdateNote(imageUploaded.Note);
+        }
+
+        private string BuildNoteText(ApiResults apiReponseBody)
+        {
+            StringBuilder output = new StringBuilder();
+            foreach (var item in apiReponseBody.RecognitionResult.Lines)
+            {
+                output.Append(item.Text);
+                output.Append(Environment.NewLine);
+            }
+            return output.ToString();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Details(Note note, string imgUrl)
+        {
+            ViewBag.ImgUrl = imgUrl;
+            await _note.UpdateNote(note);
+            return View(note);
+        }
     }
 }
