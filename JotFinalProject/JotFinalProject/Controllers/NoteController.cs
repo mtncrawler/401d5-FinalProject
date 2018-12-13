@@ -76,7 +76,7 @@ namespace JotFinalProject.Controllers
             
             //string filepath = $"{_environment.WebRootPath}\\Images\\testImage.jpg";
 
-            blob.UploadFile(mycontainer, fileName, filePath);
+            await blob.UploadFile(mycontainer, fileName, filePath);
 
 
             // grabbing image from blob storage
