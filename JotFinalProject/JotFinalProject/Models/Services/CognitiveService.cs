@@ -26,7 +26,7 @@ namespace JotFinalProject.Models.Services
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", ApiKey);
 
             // Request parameters
-            var uri = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/recognizeText?mode=Printed";
+            var uri = "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/recognizeText?mode=Handwritten";
             
             StringContent content = generateBody(imageUrl);
             HttpResponseMessage response = await client.PostAsync(uri, content);

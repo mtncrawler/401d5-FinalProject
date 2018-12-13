@@ -15,7 +15,7 @@ namespace JotFinalProject.Models.Interfaces
 
         Task<Category> GetCategory(int? id);
 
-        Task<List<Category>> GetCategories();
+        Task<List<Category>> GetCategories(string userId);
 
         Task<List<Note>> GetAllNotesFromCategory(int? id);
     }
