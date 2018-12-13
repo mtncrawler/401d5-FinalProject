@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JotFinalProject.Data;
 using JotFinalProject.Models;
 using JotFinalProject.Models.AccountViewModel;
+using JotFinalProject.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,15 @@ namespace JotFinalProject.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private ApplicationDBContext _context;
         private JotDbContext _jotContext;
+        private ICategory _category;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDBContext context, JotDbContext jotContext)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDBContext context, JotDbContext jotContext, ICategory category)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _jotContext = jotContext;
+            _category = category;
         }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace JotFinalProject.Controllers
                         Name = "Default",
                         UserID = getUser.Id.ToString()
                     };
+                    await _category.AddCategory(defaultCategory);
                                  
                     return RedirectToAction("Index", "Home");
                 }
