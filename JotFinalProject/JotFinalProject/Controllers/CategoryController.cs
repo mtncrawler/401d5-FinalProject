@@ -27,7 +27,9 @@ namespace JotFinalProject.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var cat = await _context.GetCategories();
+            var getUser = await _userManager.GetUserAsync(User);
+            string id = getUser.Email;
+            var cat = await _context.GetCategories(id);
             return View(cat);
         }
 
@@ -63,8 +65,8 @@ namespace JotFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var getUser = _userManager.GetUserAsync(User);
-                category.UserID = getUser.Id.ToString();
+                var getUser = await _userManager.GetUserAsync(User);
+                category.UserID = getUser.Email;
                 await _context.AddCategory(category);
                 return RedirectToAction("Index");
             }
@@ -101,6 +103,8 @@ namespace JotFinalProject.Controllers
             {
                 try
                 {
+                    var getUser = await _userManager.GetUserAsync(User);
+                    category.UserID = getUser.Email;
                     await _context.UpdateCategory(category);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -141,6 +145,8 @@ namespace JotFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //var getUser = await _userManager.GetUserAsync(User);
+            //var userId = getUser.Email;
             await _context.DeleteCategory(id);
             return RedirectToAction(nameof(Index));
         }

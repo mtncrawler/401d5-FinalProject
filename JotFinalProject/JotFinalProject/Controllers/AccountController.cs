@@ -69,11 +69,11 @@ namespace JotFinalProject.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     // create default category upon registration for a user to add initial notes
-                    var getUser = _userManager.GetUserAsync(User);            
+
                     Category defaultCategory = new Category()
                     {
                         Name = "Default",
-                        UserID = getUser.Id.ToString()
+                        UserID = user.Email
                     };
                     await _category.AddCategory(defaultCategory);
                                  
