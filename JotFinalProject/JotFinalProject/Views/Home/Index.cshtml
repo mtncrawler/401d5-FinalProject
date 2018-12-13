@@ -10,14 +10,14 @@
 
 <h1>Hello, Wanna Jot?</h1>
 
-@*@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User))
 {
     <p>Welcome back, @User.Claims.First(name => name.Type == "FirstName").Value !</p>
 }
 else
 {
     <p>You are not logged in!</p>
-}*@
+}
 
 <table>
     <thead>
