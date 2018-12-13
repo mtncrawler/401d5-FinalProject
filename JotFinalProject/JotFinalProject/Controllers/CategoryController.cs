@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JotFinalProject.Data;
 using JotFinalProject.Models;
 using JotFinalProject.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +15,13 @@ namespace JotFinalProject.Controllers
     {
         private readonly ICategory _context;
         private readonly JotDbContext _jotdbcontext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CategoryController(ICategory context, JotDbContext jotdbcontext)
+        public CategoryController(ICategory context, JotDbContext jotdbcontext, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _jotdbcontext = jotdbcontext;
+            _userManager = userManager;
         }
 
         // GET: Categories
@@ -60,6 +63,8 @@ namespace JotFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var getUser = _userManager.GetUserAsync(User);
+                category.UserID = getUser.Id.ToString();
                 await _context.AddCategory(category);
                 return RedirectToAction("Index");
             }

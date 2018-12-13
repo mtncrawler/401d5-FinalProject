@@ -36,9 +36,9 @@ namespace JotFinalProject.Models.Services
             return result;
         }
 
-        public async Task<List<Category>> GetCategories()
+        public async Task<List<Category>> GetCategories(string userId)
         {
-            return await _context.Category.ToListAsync();
+            return await _context.Category.Where(cat => cat.UserID == userId).ToListAsync();
         }
 
         public async Task<Category> GetCategory(int? id)
