@@ -26,7 +26,7 @@ namespace JotFinalProject
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            CognitiveService.apiKey = Configuration["Api:Key"];
+            CognitiveService.ApiKey = Configuration["Api:Key"];
             services.AddMvc();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
