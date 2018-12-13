@@ -1,5 +1,6 @@
 ﻿body {
     font-family: 'Roboto', sans-serif;
+    /*background-image: url("Images/bgpic.jpg");*/
 }
 
 header h1 {
@@ -14,7 +15,7 @@ h1 {
 }
 
 
-h3 {
+h3, h2 {
     text-align: center;
 }
 
@@ -56,4 +57,33 @@ input {
 
 label {
     padding: 4px;
+}
+
+.btn-primary {
+    background-color: #0D7373;
+}
+
+.btn-primary:hover {
+    background-color: #1Fa6a6;
+}
+
+.linkbut {
+    background-color: #02547d;
+    color: white;
+    padding: 9px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.smaller {
+    padding: 4px 10px;
+}
+
+.text {
+    font-weight: 500;
+    font-size: 18px;
+    color: black;
+    letter-spacing: 1px;
+    font-variant: small-caps;
 }
