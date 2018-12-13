@@ -18,7 +18,7 @@ namespace JotFinalProject.Models.Services
             _imageUpload = imageUpload;
         }
 
-        public async Task<ImageUploaded> AnalyzeImage(string imageUrl, string userID)
+        public async Task<ImageUploaded> AnalyzeImage(string imageUrl, string userID, int categoryID, string fileName)
         {
             var client = new HttpClient();
 
@@ -31,17 +31,17 @@ namespace JotFinalProject.Models.Services
             StringContent content = generateBody(imageUrl);
             HttpResponseMessage response = await client.PostAsync(uri, content);
             
-            return await SaveUploadedImage(userID, imageUrl, response.Headers.GetValues("Operation-Location").FirstOrDefault());
+            return await SaveUploadedImage(userID, imageUrl, categoryID, fileName, response.Headers.GetValues("Operation-Location").FirstOrDefault());
         }
 
-        private async Task<ImageUploaded> SaveUploadedImage(string userID, string imageUrl, string operationLocation)
+        private async Task<ImageUploaded> SaveUploadedImage(string userID, string imageUrl, int categoryID, string fileName, string operationLocation)
         {
             var imageUploaded = new ImageUploaded()
             {
                 UserId = userID,
                 ImageUrl = imageUrl,
                 OperationLocation = operationLocation,
-                Note = new Note { UserID = userID , CategoryID = 1 }
+                Note = new Note { UserID = userID , CategoryID = categoryID, Title = fileName }
             };
 
             await _imageUpload.CreateImageUploaded(imageUploaded);
