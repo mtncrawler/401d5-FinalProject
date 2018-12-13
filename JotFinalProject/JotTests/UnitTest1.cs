@@ -165,50 +165,75 @@ namespace JotTests
         }
 
 
-        ///// <summary>
-        ///// Test to create and read category
-        ///// </summary>
-        //[Fact]
-        //public async void TestCreateCategory()
-        //{
-        //    DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("AddCategory").Options;
+        /// <summary>
+        /// Test to create and read category
+        /// </summary>
+        [Fact]
+        public async void TestCreateCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("AddCategory").Options;
 
-        //    using (JotDbContext context = new JotDbContext(options))
-        //    {
-        //        Category category = new Category();
-        //        category.Name = "TestCategory";
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "TestCategory";
 
-        //        context.Category.Add(category);
-        //        context.SaveChanges();
+                context.Category.Add(category);
+                context.SaveChanges();
 
-        //        var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+                var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
 
-        //        Assert.Equal("TestCategory", category.Name);
-        //    }
-        //}
+                Assert.Equal("TestCategory", categoryName.Name);
+            }
+        }
 
-        ///// <summary>
-        ///// Test to update category
-        ///// </summary>
-        //[Fact]
-        //public async void TestUpdateCategory()
-        //{
-        //    DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
+        /// <summary>
+        /// Test to update category
+        /// </summary>
+        [Fact]
+        public async void TestUpdateCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
 
-        //    using (JotDbContext context = new JotDbContext(options))
-        //    {
-        //        Category category = new Category();
-        //        category.Name = "Test";
-        //        category.Name = "Test2";
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "Test";
+                category.Name = "Test2";
 
-        //        context.Update(category);
-        //        context.SaveChanges();
+                context.Update(category);
+                context.SaveChanges();
 
-        //        var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+                var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
 
-        //        Assert.Equal("Test2", category.Name);
-        //    }
-        //}
+                Assert.Equal("Test2", category.Name);
+            }
+        }
+
+        /// <summary>
+        /// Test to update category
+        /// </summary>
+        [Fact]
+        public async void TestDeleteCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
+
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "Test";
+
+                context.Add(category);
+                context.SaveChanges();
+
+                context.Category.Remove(category);
+                context.SaveChanges();
+
+                var categories = await context.Category.ToListAsync();
+
+                Assert.DoesNotContain(category, categories);
+            }
+        }
 
 
 
