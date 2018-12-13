@@ -1,4 +1,6 @@
+using JotFinalProject.Data;
 using JotFinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using Xunit;
 
@@ -162,6 +164,124 @@ namespace JotTests
             Assert.Equal("22", note.UserID);
         }
 
+        /// <summary>
+        /// Test to get note title
+        /// </summary>
+        [Fact]
+        public void TestToGetNoteTitle()
+        {
+            Note note = new Note();
+            note.Title = "Test";
+
+            Assert.Equal("Test", note.Title);
+        }
+
+        /// <summary>
+        /// Test to set note title
+        /// </summary>
+        [Fact]
+        public void TestToSetNoteTitle()
+        {
+            Note note = new Note();
+            note.Title = "Test";
+
+            note.Title = "Test2";
+
+            Assert.Equal("Test2", note.Title);
+        }
+
+        /// <summary>
+        /// Test to create and read category
+        /// </summary>
+        [Fact]
+        public async void TestCreateCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("AddCategory").Options;
+
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "TestCategory";
+
+                context.Category.Add(category);
+                context.SaveChanges();
+
+                var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+
+                Assert.Equal("TestCategory", categoryName.Name);
+            }
+        }
+
+        /// <summary>
+        /// Test to update category
+        /// </summary>
+        [Fact]
+        public async void TestUpdateCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
+
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "Test";
+                category.Name = "Test2";
+
+                context.Update(category);
+                context.SaveChanges();
+
+                var categoryName = await context.Category.FirstOrDefaultAsync(cat => cat.Name == category.Name);
+
+                Assert.Equal("Test2", category.Name);
+            }
+        }
+
+        /// <summary>
+        /// Test to update category
+        /// </summary>
+        [Fact]
+        public async void TestDeleteCategory()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetCategory").Options;
+
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Category category = new Category();
+                category.Name = "Test";
+
+                context.Add(category);
+                context.SaveChanges();
+
+                context.Category.Remove(category);
+                context.SaveChanges();
+
+                var categories = await context.Category.ToListAsync();
+
+                Assert.DoesNotContain(category, categories);
+            }
+        }
+
+        /// <summary>
+        /// Test to update note
+        /// </summary>
+        [Fact]
+        public async void TestUpdateNote()
+        {
+            DbContextOptions<JotDbContext> options = new DbContextOptionsBuilder<JotDbContext>().UseInMemoryDatabase("GetNote").Options;
+
+            using (JotDbContext context = new JotDbContext(options))
+            {
+                Note note = new Note(); ;
+                note.Title = "Test";
+                note.Title = "Test2";
+
+                context.Update(note);
+                context.SaveChanges();
+
+                var noteName = await context.Notes.FirstOrDefaultAsync(n => n.Title == note.Title);
+
+                Assert.Equal("Test2", noteName.Title);
+            }
+        }
     }
 }
 
