@@ -17,12 +17,14 @@ namespace JotFinalProject.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private ApplicationDBContext _context;
+        private JotDbContext _jotContext;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDBContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDBContext context, JotDbContext jotContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _jotContext = jotContext;
         }
 
         /// <summary>
@@ -62,7 +64,15 @@ namespace JotFinalProject.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     await _userManager.AddClaimAsync(user, nameClaim);
-               
+
+                    // create default category upon registration for a user to add initial notes
+                    var getUser = _userManager.GetUserAsync(User);            
+                    Category defaultCategory = new Category()
+                    {
+                        Name = "Default",
+                        UserID = getUser.Id.ToString()
+                    };
+                                 
                     return RedirectToAction("Index", "Home");
                 }
                 else
