@@ -15,7 +15,7 @@
                     <h4>
                         @Html.DisplayFor(modelItem => item.Title)
                     </h4>
-                    <a asp-action="Details" asp-controller="Notes" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
+                    <a asp-action="NoteToImageUpload" asp-controller="Note" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
                 </div>
             </div>
         }

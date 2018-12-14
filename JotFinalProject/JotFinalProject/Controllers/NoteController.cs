@@ -96,6 +96,17 @@ namespace JotFinalProject.Controllers
             return RedirectToAction("Details", "Note", new { id = newImage.Id });
         }
 
+        public async Task<IActionResult> NoteToImageUpload(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var images = _imageUploaded.GetImageUploadeds(user.Id);
+
+            var image = images.Where(x => x.Note.ID == id).FirstOrDefault();
+
+            return RedirectToAction("Details", "Note", new { id = image.Id });
+        }
+
 
         public async Task<IActionResult> Details(int id)
         {
