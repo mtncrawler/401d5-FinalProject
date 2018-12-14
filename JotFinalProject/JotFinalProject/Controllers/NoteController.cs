@@ -145,11 +145,11 @@ namespace JotFinalProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Details(Note note, string imgUrl)
+        public async Task<IActionResult> Details(Note note, string imgUrl, int categoryID)
         {
             ViewBag.ImgUrl = imgUrl;
             await _note.UpdateNote(note);
-            return View(note);
+            return RedirectToAction("Details", "Category", new { id = categoryID });
         }
     }
 }
