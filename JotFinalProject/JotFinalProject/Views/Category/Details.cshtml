@@ -4,12 +4,8 @@
     Layout = "_Layout";
 }
 
-<p>
-    <a asp-action="Index"><h6 class="d-inline ml-4">Back to Categories</h6></a>
-</p>
-
-<hr />
-
+<h2>Notes</h2>
+<br />
 <div class="container-fluid">
     <div class="row">
         @foreach (var item in Model.Notes)
@@ -19,13 +15,16 @@
                     <h4>
                         @Html.DisplayFor(modelItem => item.Title)
                     </h4>
-                    <span class="badge badge-primary mb-4" id="@Html.DisplayFor(modelItem => item.Text)">
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </span>
-                    <a asp-action="Details" asp-controller="Note" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
+                    <a asp-action="NoteToImageUpload" asp-controller="Note" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
                 </div>
             </div>
         }
+
     </div>
+</div>
+<br />
+<br />
+<div>
+    <a class="linkbut" asp-action="Index">Back to Categories</a>
 </div>
 
