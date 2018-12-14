@@ -117,7 +117,7 @@ namespace JotFinalProject.Controllers
 
                 if (result.Succeeded)
                 {                 
-                    return RedirectToAction("Index", "Note");
+                    return RedirectToAction("Index", "Category");
                 }
                 else
                 {
@@ -137,7 +137,7 @@ namespace JotFinalProject.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿body {
     font-family: 'Roboto', sans-serif;
-    /*background-image: url("Images/bgpic.jpg");*/
+    background-image: url("Images/stainedPaper.jpg");
 }
 
 header h1 {
@@ -58,7 +58,7 @@ label {
 }
 
 .btn-primary {
-    background-color: #0D7373;
+    background-color: #16C7C7;
 }
 
 .btn-primary:hover {
@@ -66,7 +66,7 @@ label {
 }
 
 .linkbut {
-    background-color: #02547d;
+    background-color: #036FA3;
     color: white;
     padding: 9px 20px;
     text-decoration: none;
@@ -87,7 +87,7 @@ label {
 }
 
 .linkbutton {
-    background-color: #0D7373;
+    background-color: #16C7C7;
     color: white;
     display: block;
     width: 100%;
@@ -96,4 +96,17 @@ label {
     line-height: 1.3333333;
     border-radius: 6px;
     text-align: center;
+}
+
+.image {
+    display: block;
+    margin: 20px auto;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+textarea {
+    resize: both;
+    overflow: auto;
+    margin: 10px auto;
 }
