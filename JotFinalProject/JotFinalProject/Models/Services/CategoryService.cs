@@ -32,7 +32,7 @@ namespace JotFinalProject.Models.Services
 
         public async Task<List<Note>> GetAllNotesFromCategory(int? id)
         {
-            var result = await _context.Notes.Where(note => note.ID == id).ToListAsync();
+            var result = await _context.Notes.Where(note => note.CategoryID == id).ToListAsync();
             return result;
         }
 
