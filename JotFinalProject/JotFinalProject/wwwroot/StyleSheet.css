@@ -14,7 +14,6 @@ h1 {
     font-size: 3em;
 }
 
-
 h3, h2 {
     text-align: center;
 }
@@ -47,7 +46,6 @@ h3, h2 {
 input {
     padding: 4px;
 }
-
 
 .form-signin {
     max-width: 330px;
@@ -86,4 +84,16 @@ label {
     color: black;
     letter-spacing: 1px;
     font-variant: small-caps;
+}
+
+.linkbutton {
+    background-color: #0D7373;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    text-align: center;
 }
