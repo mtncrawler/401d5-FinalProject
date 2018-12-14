@@ -77,7 +77,7 @@ namespace JotFinalProject.Controllers
                     };
                     await _category.AddCategory(defaultCategory);
                                  
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Category");
                 }
                 else
                 {

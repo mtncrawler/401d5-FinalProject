@@ -25,12 +25,12 @@ namespace JotFinalProject.Models.Services
 
         public List<ImageUploaded> GetImageUploadeds(string userId)
         {
-            return  _context.ImageUploadeds.Include(x => x.Note).Where(x => x.UserId.Equals(userId)).ToList();
+            return  _context.ImageUploadeds.Include(x => x.Note).Include(x => x.Note.Category).Where(x => x.UserId.Equals(userId)).ToList();
         }
 
         public async Task<ImageUploaded> GetImageUploaded(int id)
         {
-            return await _context.ImageUploadeds.Include(x => x.Note).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.ImageUploadeds.Include(x => x.Note.Category).Include(x => x.Note).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
