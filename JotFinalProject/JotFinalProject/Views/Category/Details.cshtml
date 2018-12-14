@@ -22,7 +22,7 @@
                     <span class="badge badge-primary mb-4" id="@Html.DisplayFor(modelItem => item.Text)">
                         @Html.DisplayFor(modelItem => item.Text)
                     </span>
-                    <a asp-action="Details" asp-controller="Notes" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
+                    <a asp-action="NoteToImageUpload" asp-controller="Note" asp-route-id="@item.ID"><div class="btn btn-primary card-button">Details</div></a>
                 </div>
             </div>
         }
