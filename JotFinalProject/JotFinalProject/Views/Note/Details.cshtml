@@ -3,23 +3,21 @@
 @{
     Layout = "_Layout";
 }
-<div style="display:flex;">
-    <div>
-        <img src="@ViewBag.ImgUrl" style="max-width: 600px;" />
-    </div>
+@*<h2>@Model.Category.Name</h2>*@
+<div class="container">
+            <img class="image" src="@ViewBag.ImgUrl"/>
+            <div>
+                <form class="form-signin" asp-controller="Note" asp-action="Details" method="post">
 
-    <div>
-        <form asp-controller="Note" asp-action="Details" method="post">
-            <input hidden asp-for="ID" value="@Model.ID" />
-            <input hidden asp-for="UserID" value="@Model.UserID" />
-            <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
-            <input asp-for="CategoryID" value="@Model.CategoryID" />
-            <label asp-for="Title"></label>
-            <input class="form-control" asp-for="Title" value="@Model.Title" />
-            <textarea asp-for="Text" rows="20" cols="50">
+                    <input hidden asp-for="ID" value="@Model.ID" />
+                    <input hidden asp-for="UserID" value="@Model.UserID" />
+                    <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
+                    <label asp-for="Title">Note Title: </label>
+                    <input class="form-control" asp-for="Title" value="@Model.Title" />
+                    <textarea class="form-control" asp-for="Text" rows="20">
                 @Model.Text
             </textarea>
-            <button>Save</button>
-        </form>
-    </div>
+                    <button>Save</button>
+                </form>
+            </div>
 </div>
