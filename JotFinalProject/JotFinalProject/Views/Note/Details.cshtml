@@ -11,6 +11,7 @@
 
                     <input hidden asp-for="ID" value="@Model.ID" />
                     <input hidden asp-for="UserID" value="@Model.UserID" />
+                    <input hidden name="categoryID" value="@Model.CategoryID"/>
                     <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
                     <label asp-for="Title">Note Title: </label>
                     <input class="form-control" asp-for="Title" value="@Model.Title" />
