@@ -43,7 +43,10 @@ namespace JotFinalProject.Controllers
 
         public async Task<IActionResult> Upload()
         {
-            ViewBag.Categories = await _category.GetCategories();
+            var user = await _userManager.GetUserAsync(User);
+            string email = user.Email;
+
+            ViewBag.Categories = await _category.GetCategories(email);
             return View();
         }
 
