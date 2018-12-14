@@ -21,9 +21,11 @@ namespace JotFinalProject.Controllers
         IImageUploaded _imageUploaded;
         ICognitive _cognitive;
         INote _note;
+        ICategory _category;
+
         UserManager<ApplicationUser> _userManager;
 
-        public NoteController(IConfiguration configuration, IHostingEnvironment environment, IImageUploaded imageUploaded, ICognitive cognitive, UserManager<ApplicationUser> userManager, INote note)
+        public NoteController(IConfiguration configuration, IHostingEnvironment environment, IImageUploaded imageUploaded, ICognitive cognitive, UserManager<ApplicationUser> userManager, INote note, ICategory category)
         {
             _configuration = configuration;
             _environment = environment;
@@ -31,6 +33,7 @@ namespace JotFinalProject.Controllers
             _cognitive = cognitive;
             _userManager = userManager;
             _note = note;
+            _category = category;
         }
 
         public IActionResult Index()
@@ -38,8 +41,9 @@ namespace JotFinalProject.Controllers
             return View();
         }
 
-        public IActionResult Upload()
+        public async Task<IActionResult> Upload()
         {
+            ViewBag.Categories = await _category.GetCategories();
             return View();
         }
 
@@ -50,27 +54,27 @@ namespace JotFinalProject.Controllers
 
             // full path to file in temp location
             var filePath = Path.GetTempFileName();
-            
-                if (file.Length > 0)
+
+            if (file.Length > 0)
+            {
+                using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
+                    await file.CopyToAsync(stream);
                 }
+            }
 
             return filePath;
         }
 
         [HttpPost]
-        public async Task<IActionResult> TestBlob(IFormFile file, string fileName)
+        public async Task<IActionResult> TestBlob(IFormFile file, string fileName, string categoryID)
         {
             var filePath = await Post(file);
 
             Blob blob = new Blob(_configuration["BlobStorageAccountName"], _configuration["BlobStorageKey"]);
 
             var mycontainer = await blob.GetContainer("jotnotes");
-            
+
             await blob.UploadFile(mycontainer, fileName, filePath);
 
 
@@ -80,14 +84,13 @@ namespace JotFinalProject.Controllers
             //grabbing url from image for use in API
             string imageUrl = image.StorageUri.PrimaryUri.ToString();
 
-            // relates to line 92 ... 1 is hardcoded for now
-            // TODO: Uncomment
-           var user = await _userManager.GetUserAsync(User);
+
+            var user = await _userManager.GetUserAsync(User);
 
             //making new imageUploaded from API call
-            var newImage = await _cognitive.AnalyzeImage(imageUrl, user.Id);
+            var newImage = await _cognitive.AnalyzeImage(imageUrl, user.Id, Convert.ToInt32(categoryID), fileName);
 
-            return RedirectToAction("Details", "Note" , new { id = newImage.Id });
+            return RedirectToAction("Details", "Note", new { id = newImage.Id });
         }
 
 
