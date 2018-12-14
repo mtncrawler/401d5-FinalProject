@@ -9,6 +9,11 @@ The purpose of this app is to convert handwritten notes into text files for easi
 ## Deployed website 
 https://jot360.azurewebsites.net/
 
+## Walk Through
+Upon initial visit of our webapp you are greeted with the login page. 
+![Login](/assets/Login.png)
+
+
 ## Tools Used
 
 Visual Studio, .NET MVC CORE, Entity Framework, CSS/HTML, SQL database, Azure, Azure Blob Storage, Azure Cognitive Services- Computer Vision, Bootstrap
