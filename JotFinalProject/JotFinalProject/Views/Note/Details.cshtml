@@ -1,24 +1,25 @@
 ﻿@using JotFinalProject.Models
 @model JotFinalProject.Models.Note
+
 @{
     Layout = "_Layout";
 }
-@*<h2>@Model.Category.Name</h2>*@
+<h2>@Model.Category.Name</h2>
 <div class="container">
             <img class="image" src="@ViewBag.ImgUrl"/>
             <div>
                 <form class="form-signin" asp-controller="Note" asp-action="Details" method="post">
-
                     <input hidden asp-for="ID" value="@Model.ID" />
                     <input hidden asp-for="UserID" value="@Model.UserID" />
-                    <input hidden name="categoryID" value="@Model.CategoryID"/>
+                    <input hidden name="categoryID" value="@Model.CategoryID" />
                     <input hidden type="text" name="imgUrl" value="@ViewBag.ImgUrl" />
                     <label asp-for="Title">Note Title: </label>
                     <input class="form-control" asp-for="Title" value="@Model.Title" />
                     <textarea class="form-control" asp-for="Text" rows="20">
                 @Model.Text
             </textarea>
-                    <button>Save</button>
+                    <button class="btn btn-default btn-primary">Save</button>
+                    <a asp-action="Index"><button class="btn btn-default btn-primary">Cancel</button></a>
                 </form>
             </div>
 </div>
