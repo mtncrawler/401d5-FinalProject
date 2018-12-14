@@ -11,7 +11,7 @@ https://jot360.azurewebsites.net/
 
 ## Walk Through
 Upon initial visit of our webapp you are greeted with the login page. 
-![Login](/assets/Login.png)
+![Login](/assets/Login.PNG)
 
 
 ## Tools Used
