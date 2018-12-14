@@ -12,9 +12,13 @@ https://jot360.azurewebsites.net/
 ## Walk Through
 Upon initial visit of our webapp you are greeted with the login page. 
 ![Login](/assets/Login.PNG)
-![Upload](/assets/Upload.PNG)
-![Note](/assets/Note.PNG)
+Once we log in we can view the different notes we have based on the categories. 
 ![Categories](/assets/Categories.PNG)
+The webapp allows you to upload and store the images to your preferred category. 
+![Upload](/assets/Upload.PNG)
+Once we upload the image of our notes we can save and edit it accordingly.
+![Note](/assets/Note.PNG)
+
 
 ## Tools Used
 
