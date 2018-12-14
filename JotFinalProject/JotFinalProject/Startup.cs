@@ -38,11 +38,11 @@ namespace JotFinalProject
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<JotDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ProductionDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDBContext>(options =>
 
-            options.UseSqlServer(Configuration.GetConnectionString("UsersDb")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             
             services.AddTransient<IImageUploaded, ImageUploadedService>();
